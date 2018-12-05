@@ -10,11 +10,12 @@ class App extends React.Component {
   state = {
     open: false,
     btnRef: null,
-    itemsMenu: []
+    itemsMenu: [],
+    button1Text: "button1.0",
+    button2Text: "button2.0"
   };
 
   handleToggle = event => {
-    console.log(event.target.textContent);
     let items = items1.includes(event.target.textContent) ? items1 : items2;
     this.setState({
       open: !this.state.open,
@@ -27,18 +28,30 @@ class App extends React.Component {
     this.setState({ open: false });
   };
 
+  onChangeText = newItem => {
+    if (this.state.btnRef.textContent === this.state.button1Text) {
+      this.setState({ button1Text: newItem });
+    } else if (this.state.btnRef.textContent === this.state.button2Text) {
+      this.setState({ button2Text: newItem });
+    }
+    this.handleClose();
+  };
+
   render() {
     return (
       <React.Fragment>
         <Grid container spacing={24}>
           <ButtonProp handleToggle={this.handleToggle} open={this.state.open}>
-            button1.0
+            {this.state.button1Text}
           </ButtonProp>
-          <ButtonProp handleToggle={this.handleToggle}>button2.0</ButtonProp>
+          <ButtonProp handleToggle={this.handleToggle} open={this.state.open}>
+            {this.state.button2Text}
+          </ButtonProp>
         </Grid>
         <DropDownMenu
           open={this.state.open}
           btnRef={this.state.btnRef}
+          onChangeText={this.onChangeText}
           handleClose={this.handleClose}
           itemsMenu={this.state.itemsMenu}
         />

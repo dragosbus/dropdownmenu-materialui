@@ -6,7 +6,13 @@ import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 
-export function DropDownMenu({ open, btnRef, handleClose, itemsMenu }) {
+export function DropDownMenu({
+  open,
+  btnRef,
+  onChangeText,
+  handleClose,
+  itemsMenu
+}) {
   return (
     <Popper open={open} anchorEl={btnRef} transition disablePortal>
       {({ TransitionProps, placement }) => (
@@ -22,7 +28,9 @@ export function DropDownMenu({ open, btnRef, handleClose, itemsMenu }) {
             <ClickAwayListener onClickAway={handleClose}>
               <MenuList>
                 {itemsMenu.map(item => (
-                  <MenuItem onClick={handleClose}>{item}</MenuItem>
+                  <MenuItem key={item} onClick={() => onChangeText(item)}>
+                    {item}
+                  </MenuItem>
                 ))}
               </MenuList>
             </ClickAwayListener>
