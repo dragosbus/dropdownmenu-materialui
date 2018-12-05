@@ -3,15 +3,18 @@ import Grid from "@material-ui/core/Grid";
 import { ButtonProp } from "./ButtonProp";
 import { DropDownMenu } from "./DropDown";
 
+const items1 = ["button1.0", "button1.1", "button1.2"];
+const items1 = ["button2.0", "button2.1", "button2.2"];
+
 class App extends React.Component {
   state = {
     open: false,
     btnRef: null,
-    itemMenu: ""
+    itemsMenu: []
   };
 
   handleToggle = event => {
-    console.log(event.target);
+    console.log(event.target.textContent);
     this.setState({ open: !this.state.open, btnRef: event.target });
   };
 
@@ -24,14 +27,15 @@ class App extends React.Component {
       <React.Fragment>
         <Grid container spacing={24}>
           <ButtonProp handleToggle={this.handleToggle} open={this.state.open}>
-            Button 1
+            button1.0
           </ButtonProp>
-          <ButtonProp handleToggle={this.handleToggle}>Button 2</ButtonProp>
+          <ButtonProp handleToggle={this.handleToggle}>button2.0</ButtonProp>
         </Grid>
         <DropDownMenu
           open={this.state.open}
           btnRef={this.state.btnRef}
           handleClose={this.handleClose}
+          itemsMenu={this.state.itemsMenu}
         />
       </React.Fragment>
     );
