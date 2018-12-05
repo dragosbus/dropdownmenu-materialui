@@ -4,7 +4,7 @@ import { ButtonProp } from "./ButtonProp";
 import { DropDownMenu } from "./DropDown";
 
 const items1 = ["button1.0", "button1.1", "button1.2"];
-const items1 = ["button2.0", "button2.1", "button2.2"];
+const items2 = ["button2.0", "button2.1", "button2.2"];
 
 class App extends React.Component {
   state = {
@@ -15,7 +15,12 @@ class App extends React.Component {
 
   handleToggle = event => {
     console.log(event.target.textContent);
-    this.setState({ open: !this.state.open, btnRef: event.target });
+    let items = items1.includes(event.target.textContent) ? items1 : items2;
+    this.setState({
+      open: !this.state.open,
+      btnRef: event.target,
+      itemsMenu: items
+    });
   };
 
   handleClose = event => {
